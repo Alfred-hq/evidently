@@ -39,7 +39,6 @@ def _median_bw_ref_iqr(
 median_within_iqr_stat_test = StatTest(
     name="median_bw_ref_iqr",
     display_name="Median within Reference IQR test",
-    func=_median_bw_ref_iqr,
     allowed_feature_types=[ColumnType.Numerical],
     default_threshold=None  # Not used in this test
 )

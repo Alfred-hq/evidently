@@ -37,7 +37,6 @@ def _change_in_mean_from_ref(
 mean_change_stat_test = StatTest(
     name="change_in_mean",
     display_name="Change in Mean test",
-    func=_change_in_mean_from_ref,
     allowed_feature_types=[ColumnType.Numerical],
     default_threshold=0.1 
 )

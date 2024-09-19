@@ -42,7 +42,6 @@ def _value_within_ref_z_score(
 value_within_z_score_stat_test = StatTest(
     name="value_within_ref_z_score",
     display_name="Proportion of Values within Reference Z-score",
-    func=_value_within_ref_z_score,
     allowed_feature_types=[ColumnType.Numerical],
     default_threshold=0.5  
 )

@@ -40,7 +40,6 @@ def _rate_of_change_within_ref_iqr(
 rate_of_change_iqr_stat_test = StatTest(
     name="rate_of_change_within_ref_iqr",
     display_name="Rate of Change within Reference IQR",
-    func=_rate_of_change_within_ref_iqr,
     allowed_feature_types=[ColumnType.Numerical],
     default_threshold=0.5 
 )

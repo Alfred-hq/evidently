@@ -41,7 +41,6 @@ def _change_in_rate_of_change_from_ref(
 roc_stat_test = StatTest(
     name="rate_of_change",
     display_name="Change in Rate of Change test",
-    func=_change_in_rate_of_change_from_ref,
     allowed_feature_types=[ColumnType.Numerical],
     default_threshold=0.1  
 )

@@ -45,7 +45,6 @@ def _compare_proportion_in_ref_iqr(
 iqr_proportion_stat_test = StatTest(
     name="proportion_in_ref_iqr",
     display_name="Proportion in Reference IQR test",
-    func=_compare_proportion_in_ref_iqr,
     allowed_feature_types=[ColumnType.Numerical],
     default_threshold=0.05 
 )

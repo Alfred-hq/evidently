@@ -36,7 +36,6 @@ def _value_within_ref_iqr(
 value_within_iqr_stat_test = StatTest(
     name="value_within_ref_iqr",
     display_name="Proportion of Values within Reference IQR",
-    func=_value_within_ref_iqr,
     allowed_feature_types=[ColumnType.Numerical],
     default_threshold=0.5  
 )

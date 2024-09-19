@@ -41,7 +41,6 @@ def _compare_proportion_at_x(
 proportion_at_x_stat_test = StatTest(
     name="compare_proportion_at_x",
     display_name="Compare Proportion at Threshold `x`",
-    func=_compare_proportion_at_x,
     allowed_feature_types=[ColumnType.Numerical],
     default_threshold=0.05  # Adjust threshold as per your needs
 )
