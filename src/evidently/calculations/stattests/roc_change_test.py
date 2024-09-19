@@ -31,8 +31,10 @@ def _change_in_rate_of_change_from_ref(
     ref_second_derivative = np.diff(reference_rate_of_change)
     curr_second_derivative = np.diff(current_rate_of_change)
     
+    mean_ref = np.mean(ref_second_derivative)
+    mean_curr = np.mean(curr_second_derivative)
     # Compute the mean absolute difference in second derivatives between reference and current data
-    change_in_roc = np.mean(np.abs(ref_second_derivative - curr_second_derivative))
+    change_in_roc = np.abs(mean_curr - mean_ref)
     
     # If the change in rate of change is greater than the threshold, we detect drift
     return change_in_roc, change_in_roc > threshold

@@ -9,7 +9,7 @@ def _compare_proportion_at_x(
     current_data: pd.Series,
     feature_type: str,
     threshold: float,
-    x: float
+    x: float = 1.0
 ):
     """
     Compare the proportion of values greater than or equal to `x` in reference and current data.
