@@ -54,6 +54,7 @@ setup_args = dict(
         "plotly>=5.10.0",
         "statsmodels>=0.12.2",
         "scikit-learn>=1.0.1",
+        "scikit-learn-extra>=0.3.0",
         "pandas[parquet]>=1.3.5",
         "numpy>=1.22.0,<2.1",
         "nltk>=3.6.7",
