@@ -40,6 +40,7 @@ class DistinctClustersResult(MetricResult):
     class Config:
         type_alias = "evidently:metric_result:DistinctClustersResult"
     num_distinct_clusters: int
+    feature_name: str
     default_check_value: Optional[float]
 
 class DistinctClusters(Metric[DistinctClustersResult]):
@@ -55,6 +56,7 @@ class DistinctClusters(Metric[DistinctClustersResult]):
     metric_value = get_num_clusters(data.current_data[self.column_name])
     default_check_value = 1
     return DistinctClustersResult(
+        feature_name = self.column_name,
         num_distinct_clusters = metric_value,
         default_check_value = default_check_value
     )
