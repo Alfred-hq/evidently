@@ -13,7 +13,7 @@ def fit_gaussian_mixture_and_get_bic(data, n_clusters):
 def get_num_clusters(series):
     data = series.values.reshape(-1, 1)
     
-    # Define the range of clusters to test for (1 to 10 clusters)
+    # Define the range of clusters to test for (1 to 6 clusters)
     n_clusters_range = range(1, 6)
     bic_scores = []
     
