@@ -71,3 +71,39 @@ proportion_at_zero_stat_test = StatTest(
 
 # Register the new test
 register_stattest(proportion_at_zero_stat_test, _change_in_proportion_at_zero_in_percentage_from_ref)
+
+
+def _change_in_proportion_at_one_in_percentage_from_ref(
+    reference_data: pd.Series,
+    current_data: pd.Series,
+    feature_type: str,
+    threshold: float,
+):
+    """
+    Compare the proportion of values greater than or equal to 1 in reference and current data.
+    
+    Args:
+        reference_data: reference data as a pd.Series
+        current_data: current data as a pd.Series
+        feature_type: feature type (Numerical, Categorical, etc.)
+        threshold: threshold for detecting drift (difference in proportions above this threshold indicates drift)
+        x: the threshold value at which to compare proportions
+    
+    Returns:
+        pvalue: the absolute difference in proportions at 1
+        test_result: whether the drift is detected based on the threshold
+    """
+    return _change_in_proportion_at_x_in_percentage_from_ref(reference_data=reference_data, current_data=current_data, 
+                                                             feature_type=feature_type, threshold=threshold, x=1)
+
+
+# Create the StatTest object for comparing proportions at a threshold
+proportion_at_one_stat_test = StatTest(
+    name="change_in_proportion_at_one_in_percentage_from_ref",
+    display_name="Compare Proportion at One",
+    allowed_feature_types=[ColumnType.Numerical],
+    default_threshold=20  # Adjust threshold as per your needs
+)
+
+# Register the new test
+register_stattest(proportion_at_one_stat_test, _change_in_proportion_at_one_in_percentage_from_ref)

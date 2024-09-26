@@ -30,7 +30,7 @@ from .z_stattest import z_stat_test
 from .change_in_mean_test import mean_change_stat_test
 from .change_in_var_test import var_change_stat_test
 from .compare_proportion_in_ref_iqr_test import iqr_proportion_stat_test
-from .change_in_proportion_at_zero import proportion_at_zero_stat_test
+from .change_in_proportion_at_x import proportion_at_zero_stat_test, proportion_at_one_stat_test 
 from .median_bw_ref_iqr import median_within_iqr_stat_test
 from .rate_of_change_iqr_test import rate_of_change_iqr_stat_test
 from .roc_change_test import roc_stat_test
@@ -70,6 +70,7 @@ __all__ = [
     "var_change_stat_test",
     "iqr_proportion_stat_test",
     "proportion_at_zero_stat_test",
+    "proportion_at_one_stat_test",
     "median_within_iqr_stat_test",
     "rate_of_change_iqr_stat_test",
     "roc_stat_test",
