@@ -8,9 +8,14 @@ from evidently.tests.base_test import BaseCheckValueTest
 from evidently.tests.base_test import GroupData
 from evidently.tests.base_test import GroupingTypes
 from abc import ABC
+import dataclasses
 from evidently.utils.types import Numeric
 from typing import List, Optional, Union
 from evidently.tests.base_test import TestValueCondition
+from evidently.renderers.base_renderer import MetricRenderer
+from evidently.renderers.base_renderer import default_renderer
+from evidently.model.widget import BaseWidgetInfo
+from evidently.renderers.html_widgets import header_text
 
 def fit_gaussian_mixture_and_get_bic(data, n_clusters):
     gmm = GaussianMixture(n_components=n_clusters, random_state=42)
@@ -60,7 +65,20 @@ class DistinctClusters(Metric[DistinctClustersResult]):
         num_distinct_clusters = metric_value,
         default_check_value = default_check_value
     )
-  
+
+#renderer for DistinctClusters
+@default_renderer(wrap_type=DistinctClusters)
+class DistinctClustersRenderer(MetricRenderer):
+    def render_json(self, obj: DistinctClusters) -> dict:
+        result = dataclasses.asdict(obj.get_result())
+        return result
+
+    def render_html(self, obj: DistinctClusters) -> List[BaseWidgetInfo]:
+        metric_result = obj.get_result()
+        return [
+            # helper function for visualisation. More options here More options avaliable https://github.com/evidentlyai/evidently/blob/main/src/evidently/renderers/html_widgets.py
+            header_text(label=f"Number of Distinct Clusters Using Gaussian Mixture with BIC: {metric_result.num_distinct_clusters}"),
+        ]
 
 # make a group for test. It used for grouping tests in the report
 MY_GROUP = GroupData("custom_tests_group", "Custom Tests Group", "")
