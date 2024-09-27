@@ -33,7 +33,7 @@ def _change_in_rate_of_change_from_ref(
     change_in_roc = np.abs(mean_curr - mean_ref)
     
     # If the change in rate of change is greater than the threshold, we detect drift
-    return change_in_roc, change_in_roc > threshold*mean_ref
+    return change_in_roc, change_in_roc > np.abs(threshold*mean_ref)
 
 # Create the StatTest object
 roc_stat_test = StatTest(

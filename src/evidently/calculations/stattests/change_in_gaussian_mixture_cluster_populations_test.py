@@ -40,7 +40,7 @@ def _change_in_three_gaussian_mixture_cluster_populations_in_percentage_from_ref
     
     # Calculate the absolute difference in variances
     cluster_populations_percentage_difference = np.where(cluster_populations_ref != 0, ((cluster_populations_curr - cluster_populations_ref) / cluster_populations_ref) * 100, 0)
-    max_cluster_populations_percentage_difference = np.max(cluster_populations_percentage_difference)
+    max_cluster_populations_percentage_difference = np.max(np.abs(cluster_populations_percentage_difference))
 
     # If the difference in variance is greater than the threshold, we detect drift
     return max_cluster_populations_percentage_difference, max_cluster_populations_percentage_difference > threshold
