@@ -40,7 +40,7 @@ median_within_iqr_stat_test = StatTest(
     name="median_bw_ref_iqr",
     display_name="Median within Reference IQR test",
     allowed_feature_types=[ColumnType.Numerical],
-    default_threshold=None  # Not used in this test
+    default_threshold=0  # Not used in this test
 )
 
 # Register the new test
