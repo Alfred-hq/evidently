@@ -7,7 +7,7 @@ from sklearn.mixture import GaussianMixture
 
 def _get_three_gaussian_mixture_cluster_populations(series: pd.Series, n_components: int = 2):
     X = series.values.reshape(-1, 1)
-    gaussian_mix_model = GaussianMixture(n_components=n_components)  
+    gaussian_mix_model = GaussianMixture(n_components=n_components, random_state=42)  
     gaussian_mix_model.fit(X)
     cluster_labels_for_each_value = gaussian_mix_model.predict(X)
     series_with_clusters = pd.DataFrame({'value': series, 'cluster': cluster_labels_for_each_value})
