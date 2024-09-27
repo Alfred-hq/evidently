@@ -31,7 +31,7 @@ def _change_in_mean_from_ref(
     mean_difference = np.abs(mean_ref - mean_curr)
     
     # If the difference in means is greater than the threshold, we detect drift
-    return mean_difference, mean_difference < threshold*mean_ref
+    return mean_difference, mean_difference > threshold*mean_ref
 
 # Create the StatTest object for the change in mean test
 mean_change_stat_test = StatTest(

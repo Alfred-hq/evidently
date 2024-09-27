@@ -31,7 +31,7 @@ def _change_in_var_from_ref(
     var_difference = np.abs(var_ref - var_curr)
     
     # If the difference in variance is greater than the threshold, we detect drift
-    return var_difference, var_difference < threshold*var_ref
+    return var_difference, var_difference > threshold*var_ref
 
 # Create the StatTest object for the change in variance test
 var_change_stat_test = StatTest(

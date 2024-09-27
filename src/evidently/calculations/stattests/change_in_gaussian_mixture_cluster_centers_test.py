@@ -44,7 +44,7 @@ def _change_in_three_gaussian_mixture_cluster_centers_in_percentage_from_ref(
     max_cluster_centers_percentage_difference = np.max(cluster_centers_percentage_difference)
 
     # If the difference in variance is greater than the threshold, we detect drift
-    return max_cluster_centers_percentage_difference, max_cluster_centers_percentage_difference < threshold
+    return max_cluster_centers_percentage_difference, max_cluster_centers_percentage_difference > threshold
 
 # Create the StatTest object for the change in variance test
 change_in_three_gaussian_mixture_cluster_centers_in_percentage_from_ref = StatTest(
