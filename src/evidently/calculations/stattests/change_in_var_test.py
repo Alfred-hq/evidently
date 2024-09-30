@@ -24,6 +24,8 @@ def _change_in_var_from_ref(
         test_result: whether the drift is detected based on the threshold
     """
     # Calculate the variances of reference and current data
+    reference_data = reference_data.dropna()
+    current_data = current_data.dropna()
     var_ref = np.var(reference_data, ddof=1)  # Using sample variance (ddof=1)
     var_curr = np.var(current_data, ddof=1)
     
@@ -38,7 +40,7 @@ var_change_stat_test = StatTest(
     name="change_in_var",
     display_name="Change in Variance test",
     allowed_feature_types=[ColumnType.Numerical],
-    default_threshold=0.1 
+    default_threshold=1 
 )
 
 # Register the new test

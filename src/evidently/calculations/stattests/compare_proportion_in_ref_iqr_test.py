@@ -24,6 +24,8 @@ def _compare_proportion_in_ref_iqr(
         test_result: whether the drift is detected based on the threshold
     """
     # Calculate the IQR of the reference data
+    reference_data = reference_data.dropna()
+    current_data = current_data.dropna()
     q1_ref, q3_ref = np.percentile(reference_data, [25, 75])
     iqr_ref = q3_ref - q1_ref
 
@@ -36,17 +38,17 @@ def _compare_proportion_in_ref_iqr(
     curr_proportion_within_iqr = curr_within_iqr / len(current_data)
     
     # Calculate the absolute difference in proportions
-    proportion_difference = np.abs(ref_proportion_within_iqr - curr_proportion_within_iqr)
+    proportion_difference_percentage = (curr_proportion_within_iqr - ref_proportion_within_iqr)/ref_proportion_within_iqr
     
     # If the proportion difference is greater than the threshold, we detect drift
-    return proportion_difference, proportion_difference > threshold
+    return proportion_difference_percentage, proportion_difference_percentage > threshold
 
 # Create the StatTest object for comparing proportions in IQR
 iqr_proportion_stat_test = StatTest(
     name="proportion_in_ref_iqr",
     display_name="Proportion in Reference IQR test",
     allowed_feature_types=[ColumnType.Numerical],
-    default_threshold=0.05 
+    default_threshold=0.4 
 )
 
 # Register the new test

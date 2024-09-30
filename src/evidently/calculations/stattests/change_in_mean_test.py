@@ -38,7 +38,7 @@ mean_change_stat_test = StatTest(
     name="change_in_mean",
     display_name="Change in Mean test",
     allowed_feature_types=[ColumnType.Numerical],
-    default_threshold=0.1 
+    default_threshold=1 
 )
 
 # Register the new test
