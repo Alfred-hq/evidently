@@ -24,6 +24,8 @@ def _median_bw_ref_iqr(
         test_result: whether the median of current data is outside the reference IQR
     """
     # Calculate the IQR of the reference data (25th and 75th percentiles)
+    reference_data = reference_data.dropna()
+    current_data = current_data.dropna()
     q1_ref, q3_ref = np.percentile(reference_data, [25, 75])
     
     # Calculate the median of the current data
@@ -33,7 +35,7 @@ def _median_bw_ref_iqr(
     test_result = not (q1_ref <= median_curr <= q3_ref)
     
     # Return 1 if the median is outside the IQR, otherwise 0 (p-value analogy)
-    return int(test_result), test_result
+    return float(median_curr), test_result
 
 # Create the StatTest object for the median within reference IQR test
 median_within_iqr_stat_test = StatTest(
