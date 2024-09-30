@@ -24,6 +24,8 @@ def _change_in_rate_of_change_from_ref(
         test_result: whether the drift is detected based on the threshold
     """
     # Calculate the rate of change (first derivative)
+    reference_data = reference_data.dropna()
+    current_data = current_data.dropna()
     reference_rate_of_change = np.diff(reference_data)
     current_rate_of_change = np.diff(current_data)
         
