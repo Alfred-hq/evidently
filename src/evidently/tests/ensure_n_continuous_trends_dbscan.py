@@ -18,6 +18,7 @@ from evidently.model.widget import BaseWidgetInfo
 from evidently.renderers.html_widgets import header_text
 
 def get_num_distinct_continuous_trends(series: pd.Series) -> int:
+    series = series.dropna()
     series_reshaped = series.values.reshape(-1, 1)
     eps_value = np.std(series)
 
