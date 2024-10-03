@@ -31,16 +31,15 @@ def _change_in_var_from_ref(
     
     # Calculate the absolute difference in variances
     var_difference = np.abs(var_ref - var_curr)
-    
+    var_difference_percentage = np.divide(var_difference, var_ref)*100
     # If the difference in variance is greater than the threshold, we detect drift
-    return var_difference, var_difference > np.abs(threshold*var_ref)
-
+    return var_difference_percentage, var_difference_percentage > threshold
 # Create the StatTest object for the change in variance test
 var_change_stat_test = StatTest(
     name="change_in_var",
-    display_name="Change in Variance test",
+    display_name="Change in Variance from Reference",
     allowed_feature_types=[ColumnType.Numerical],
-    default_threshold=1 
+    default_threshold=10.0 
 )
 
 # Register the new test

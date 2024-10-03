@@ -33,16 +33,17 @@ def _change_in_rate_of_change_from_ref(
     mean_curr = np.mean(current_rate_of_change)
     # Compute the mean absolute difference in second derivatives between reference and current data
     change_in_roc = np.abs(mean_curr - mean_ref)
+    chnage_in_roc_percentage = np.divide(change_in_roc,mean_ref)*100
     
     # If the change in rate of change is greater than the threshold, we detect drift
-    return change_in_roc, change_in_roc > np.abs(threshold*mean_ref)
+    return chnage_in_roc_percentage, chnage_in_roc_percentage > threshold
 
 # Create the StatTest object
 roc_stat_test = StatTest(
     name="change_in_rate_of_change",
-    display_name="Change in Rate of Change test",
+    display_name="Change in Rate of Change",
     allowed_feature_types=[ColumnType.Numerical],
-    default_threshold=2
+    default_threshold=20
 )
 
 # Register the new test

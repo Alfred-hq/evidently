@@ -29,16 +29,16 @@ def _change_in_mean_from_ref(
     
     # Calculate the absolute difference in means
     mean_difference = np.abs(mean_ref - mean_curr)
-    
+    mean_difference_percentage = np.divide(mean_difference, mean_ref)*100
     # If the difference in means is greater than the threshold, we detect drift
-    return mean_difference, mean_difference > np.abs(threshold*mean_ref)
+    return mean_difference_percentage, mean_difference_percentage > threshold
 
 # Create the StatTest object for the change in mean test
 mean_change_stat_test = StatTest(
     name="change_in_mean",
-    display_name="Change in Mean test",
+    display_name="Change in Mean from Reference",
     allowed_feature_types=[ColumnType.Numerical],
-    default_threshold=1 
+    default_threshold=10.0 
 )
 
 # Register the new test

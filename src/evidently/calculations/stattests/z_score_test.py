@@ -36,14 +36,14 @@ def _value_within_ref_z_score(
     proportion_within_z_score = np.mean(np.abs(z_scores_current) <= z_score_limit)
     
     # If the proportion is below the threshold, drift is detected
-    return proportion_within_z_score, proportion_within_z_score < threshold
+    return proportion_within_z_score*100, proportion_within_z_score*100 < threshold
 
 # Create the StatTest object for the value within reference Z-score test
 value_within_z_score_stat_test = StatTest(
     name="value_within_ref_z_score",
-    display_name="Proportion of Values within Reference Z-score",
+    display_name="Percentage of Values within Reference Z-score",
     allowed_feature_types=[ColumnType.Numerical],
-    default_threshold=0.5  
+    default_threshold=50.0
 )
 
 # Register the new test

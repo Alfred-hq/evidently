@@ -34,14 +34,14 @@ def _rate_of_change_within_ref_iqr(
     proportion_within_iqr = np.mean((curr_rate_of_change >= q1_ref) & (curr_rate_of_change <= q3_ref))
     
     # If the proportion is below the threshold, drift is detected
-    return proportion_within_iqr, proportion_within_iqr < threshold
+    return proportion_within_iqr*100, proportion_within_iqr*100 < threshold
 
 # Create the StatTest object for the rate of change within reference IQR test
 rate_of_change_iqr_stat_test = StatTest(
     name="rate_of_change_within_ref_iqr",
-    display_name="Rate of Change within Reference IQR",
+    display_name="Rate of Change Within Reference IQR",
     allowed_feature_types=[ColumnType.Numerical],
-    default_threshold=0.5 
+    default_threshold=50
 )
 
 # Register the new test

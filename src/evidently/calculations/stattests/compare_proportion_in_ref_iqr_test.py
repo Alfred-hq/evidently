@@ -38,7 +38,8 @@ def _compare_proportion_in_ref_iqr(
     curr_proportion_within_iqr = curr_within_iqr / len(current_data)
     
     # Calculate the absolute difference in proportions
-    proportion_difference_percentage = (curr_proportion_within_iqr - ref_proportion_within_iqr)/ref_proportion_within_iqr
+    proportion_difference = abs(curr_proportion_within_iqr - ref_proportion_within_iqr)
+    proportion_difference_percentage = np.divide(proportion_difference,ref_proportion_within_iqr)*100
     
     # If the proportion difference is greater than the threshold, we detect drift
     return proportion_difference_percentage, proportion_difference_percentage > threshold
@@ -46,9 +47,9 @@ def _compare_proportion_in_ref_iqr(
 # Create the StatTest object for comparing proportions in IQR
 iqr_proportion_stat_test = StatTest(
     name="proportion_in_ref_iqr",
-    display_name="Proportion in Reference IQR test",
+    display_name="Percentage of Values in Reference IQR",
     allowed_feature_types=[ColumnType.Numerical],
-    default_threshold=0.4 
+    default_threshold=40
 )
 
 # Register the new test

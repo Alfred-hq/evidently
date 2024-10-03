@@ -35,12 +35,12 @@ def _median_bw_ref_iqr(
     test_result = not (q1_ref <= median_curr <= q3_ref)
     
     # Return 1 if the median is outside the IQR, otherwise 0 (p-value analogy)
-    return float(median_curr), test_result
+    return int(test_result), test_result
 
 # Create the StatTest object for the median within reference IQR test
 median_within_iqr_stat_test = StatTest(
     name="median_bw_ref_iqr",
-    display_name="Median within Reference IQR test",
+    display_name="Median Within Reference column IQR",
     allowed_feature_types=[ColumnType.Numerical],
     default_threshold=0  # Not used in this test
 )
