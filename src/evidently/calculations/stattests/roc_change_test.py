@@ -41,7 +41,7 @@ def _change_in_rate_of_change_from_ref(
 # Create the StatTest object
 roc_stat_test = StatTest(
     name="change_in_rate_of_change",
-    display_name="Change in Rate of Change",
+    display_name="Change in Rate of Change in Percentage",
     allowed_feature_types=[ColumnType.Numerical],
     default_threshold=20
 )

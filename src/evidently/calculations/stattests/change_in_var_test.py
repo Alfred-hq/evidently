@@ -37,7 +37,7 @@ def _change_in_var_from_ref(
 # Create the StatTest object for the change in variance test
 var_change_stat_test = StatTest(
     name="change_in_var",
-    display_name="Change in Variance from Reference",
+    display_name="Change in Variance from Reference in Percentage",
     allowed_feature_types=[ColumnType.Numerical],
     default_threshold=10.0 
 )

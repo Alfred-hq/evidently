@@ -64,7 +64,7 @@ def _change_in_proportion_at_zero_in_percentage_from_ref(
 # Create the StatTest object for comparing proportions at a threshold
 proportion_at_zero_stat_test = StatTest(
     name="change_in_proportion_at_zero_in_percentage_from_ref",
-    display_name="Change in Proportion at Zero from Reference",
+    display_name="Change in Proportion at Zero from Reference in Percentage",
     allowed_feature_types=[ColumnType.Numerical],
     default_threshold=20  # Adjust threshold as per your needs
 )
@@ -100,7 +100,7 @@ def _change_in_proportion_at_one_in_percentage_from_ref(
 # Create the StatTest object for comparing proportions at a threshold
 proportion_at_one_stat_test = StatTest(
     name="change_in_proportion_at_one_in_percentage_from_ref",
-    display_name="Change in Proportion at One from Reference",
+    display_name="Change in Proportion at One from Reference in Percentage",
     allowed_feature_types=[ColumnType.Numerical],
     default_threshold=20  # Adjust threshold as per your needs
 )

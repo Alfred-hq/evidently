@@ -47,7 +47,7 @@ def _compare_proportion_in_ref_iqr(
 # Create the StatTest object for comparing proportions in IQR
 iqr_proportion_stat_test = StatTest(
     name="proportion_in_ref_iqr",
-    display_name="Percentage of Values in Reference IQR",
+    display_name="Percentage of Values in Reference IQR in Percentage",
     allowed_feature_types=[ColumnType.Numerical],
     default_threshold=40
 )

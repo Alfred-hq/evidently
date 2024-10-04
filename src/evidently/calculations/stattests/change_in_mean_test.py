@@ -36,7 +36,7 @@ def _change_in_mean_from_ref(
 # Create the StatTest object for the change in mean test
 mean_change_stat_test = StatTest(
     name="change_in_mean",
-    display_name="Change in Mean from Reference",
+    display_name="Change in Mean from Reference in Percentage",
     allowed_feature_types=[ColumnType.Numerical],
     default_threshold=10.0 
 )
