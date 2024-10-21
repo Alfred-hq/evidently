@@ -93,14 +93,18 @@ def _change_in_proportion_at_one_in_percentage_from_ref(
         pvalue: the absolute difference in proportions at 1
         test_result: whether the drift is detected based on the threshold
     """
-    return _change_in_proportion_at_x_in_percentage_from_ref(reference_data=reference_data, current_data=current_data, 
+    try:
+        return _change_in_proportion_at_x_in_percentage_from_ref(reference_data=reference_data, current_data=current_data, 
                                                              feature_type=feature_type, threshold=threshold, x=1)
+    except Exception as e:
+        print(f"Error in _change_in_proportion_at_one_in_percentage_from_ref: {e}")
+        return 0, True
 
 
 # Create the StatTest object for comparing proportions at a threshold
 proportion_at_one_stat_test = StatTest(
     name="change_in_proportion_at_one_in_percentage_from_ref",
-    display_name="Change in Proportion at One from Reference in Percentage",
+    display_name="Change in Proportion at One from Reference (Percentage)",
     allowed_feature_types=[ColumnType.Numerical],
     default_threshold=20  # Adjust threshold as per your needs
 )

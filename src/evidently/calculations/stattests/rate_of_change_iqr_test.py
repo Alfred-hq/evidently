@@ -23,23 +23,27 @@ def _rate_of_change_within_ref_iqr(
         pvalue: the proportion of current data's rate of change within the reference IQR
         test_result: whether the drift is detected based on the threshold
     """
-    # Calculate the rate of change (first difference) for both reference and current data
-    ref_rate_of_change = reference_data.diff().dropna()
-    curr_rate_of_change = current_data.diff().dropna()
-    
-    # Calculate the IQR of the rate of change for the reference data
-    q1_ref, q3_ref = np.percentile(ref_rate_of_change, [25, 75])
-    
-    # Calculate the proportion of current data's rate of change values within the reference IQR
-    proportion_within_iqr = np.mean((curr_rate_of_change >= q1_ref) & (curr_rate_of_change <= q3_ref))
-    
-    # If the proportion is below the threshold, drift is detected
-    return proportion_within_iqr*100, proportion_within_iqr*100 < threshold
+    try:
+        # Calculate the rate of change (first difference) for both reference and current data
+        ref_rate_of_change = reference_data.diff().dropna()
+        curr_rate_of_change = current_data.diff().dropna()
+        
+        # Calculate the IQR of the rate of change for the reference data
+        q1_ref, q3_ref = np.percentile(ref_rate_of_change, [25, 75])
+        
+        # Calculate the proportion of current data's rate of change values within the reference IQR
+        proportion_within_iqr = np.mean((curr_rate_of_change >= q1_ref) & (curr_rate_of_change <= q3_ref))
+        
+        # If the proportion is below the threshold, drift is detected
+        return proportion_within_iqr*100, proportion_within_iqr*100 < threshold
+    except Exception as e:
+        print(f"Error in rate_of_change_within_ref_iqr: {e}")
+        return 0, True
 
 # Create the StatTest object for the rate of change within reference IQR test
 rate_of_change_iqr_stat_test = StatTest(
     name="rate_of_change_within_ref_iqr",
-    display_name="Rate of Change Within Reference IQR in Percentage",
+    display_name="Rate of Change Within Reference IQR (Percentage)",
     allowed_feature_types=[ColumnType.Numerical],
     default_threshold=50
 )

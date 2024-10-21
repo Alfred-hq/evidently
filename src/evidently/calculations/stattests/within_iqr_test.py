@@ -23,14 +23,18 @@ def _value_within_ref_iqr(
         pvalue: the proportion of current data within the reference IQR
         test_result: whether the drift is detected based on the threshold
     """
-    # Calculate the IQR of the reference data (25th and 75th percentiles)
-    q1_ref, q3_ref = np.percentile(reference_data, [25, 75])
-    
-    # Calculate the proportion of current data values within the IQR of reference data
-    proportion_within_iqr = np.mean((current_data >= q1_ref) & (current_data <= q3_ref))
-    
-    # If the proportion is below the threshold, drift is detected
-    return proportion_within_iqr, proportion_within_iqr < threshold
+    try:
+        # Calculate the IQR of the reference data (25th and 75th percentiles)
+        q1_ref, q3_ref = np.percentile(reference_data, [25, 75])
+        
+        # Calculate the proportion of current data values within the IQR of reference data
+        proportion_within_iqr = np.mean((current_data >= q1_ref) & (current_data <= q3_ref))
+        
+        # If the proportion is below the threshold, drift is detected
+        return proportion_within_iqr, proportion_within_iqr < threshold
+    except  Exception as e:
+        print(f"Error in value_within_ref_iqr: {e}")
+        return 0, True
 
 # Create the StatTest object for the value within reference IQR test
 value_within_iqr_stat_test = StatTest(

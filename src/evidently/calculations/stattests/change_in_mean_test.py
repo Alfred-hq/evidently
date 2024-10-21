@@ -23,20 +23,24 @@ def _change_in_mean_from_ref(
         pvalue: the absolute difference in means
         test_result: whether the drift is detected based on the threshold
     """
-    # Calculate the means of reference and current data
-    mean_ref = np.mean(reference_data)
-    mean_curr = np.mean(current_data)
-    
-    # Calculate the absolute difference in means
-    mean_difference = np.abs(mean_ref - mean_curr)
-    mean_difference_percentage = np.divide(mean_difference, mean_ref)*100
-    # If the difference in means is greater than the threshold, we detect drift
-    return mean_difference_percentage, mean_difference_percentage > threshold
+    try:
+        # Calculate the means of reference and current data
+        mean_ref = np.mean(reference_data)
+        mean_curr = np.mean(current_data)
+        
+        # Calculate the absolute difference in means
+        mean_difference = np.abs(mean_ref - mean_curr)
+        mean_difference_percentage = np.divide(mean_difference, mean_ref)*100
+        # If the difference in means is greater than the threshold, we detect drift
+        return mean_difference_percentage, mean_difference_percentage > threshold
+    except Exception as e:
+        print(f"Error calculating mean difference: {e}")
+        return 0, True
 
 # Create the StatTest object for the change in mean test
 mean_change_stat_test = StatTest(
     name="change_in_mean",
-    display_name="Change in Mean from Reference in Percentage",
+    display_name="(Percentage) Change in Mean from Reference",
     allowed_feature_types=[ColumnType.Numerical],
     default_threshold=10.0 
 )

@@ -35,17 +35,21 @@ def _change_in_three_gaussian_mixture_cluster_populations_in_percentage_from_ref
         pvalue: the maximum percentage difference in population proportions across clusters
         test_result: whether the drift is detected based on the threshold
     """
-    # Calculate the variances of reference and current data
-    cluster_populations_ref = _get_three_gaussian_mixture_cluster_populations(series=reference_data, n_components=3)  # Using sample variance (ddof=1)
-    cluster_populations_curr = _get_three_gaussian_mixture_cluster_populations(series=current_data, n_components=3)
-    
-    # Calculate the absolute difference in variances
-    cluster_populations_percentage_difference = np.where(cluster_populations_ref != 0, ((cluster_populations_curr - cluster_populations_ref) / cluster_populations_ref) * 100, 0)
-    max_cluster_populations_percentage_difference = np.max(np.abs(cluster_populations_percentage_difference))
+    try:
 
-    # If the difference in variance is greater than the threshold, we detect drift
-    return max_cluster_populations_percentage_difference, max_cluster_populations_percentage_difference > threshold
+        # Calculate the variances of reference and current data
+        cluster_populations_ref = _get_three_gaussian_mixture_cluster_populations(series=reference_data, n_components=3)  # Using sample variance (ddof=1)
+        cluster_populations_curr = _get_three_gaussian_mixture_cluster_populations(series=current_data, n_components=3)
+        
+        # Calculate the absolute difference in variances
+        cluster_populations_percentage_difference = np.where(cluster_populations_ref != 0, ((cluster_populations_curr - cluster_populations_ref) / cluster_populations_ref) * 100, 0)
+        max_cluster_populations_percentage_difference = np.max(np.abs(cluster_populations_percentage_difference))
 
+        # If the difference in variance is greater than the threshold, we detect drift
+        return max_cluster_populations_percentage_difference, max_cluster_populations_percentage_difference > threshold
+    except Exception as e:
+        print("Error in change_in_three_gaussian_mixture_cluster_populations_in_percentage_from_ref:", e)
+        return 0, True
 # Create the StatTest object for the change in variance test
 change_in_three_gaussian_mixture_cluster_populations_in_percentage_from_ref = StatTest(
     name="change_in_gaussian_mixture_cluster_populations",

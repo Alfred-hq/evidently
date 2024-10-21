@@ -23,25 +23,30 @@ def _change_in_rate_of_change_from_ref(
         pvalue: the calculated change in the rate of change
         test_result: whether the drift is detected based on the threshold
     """
-    # Calculate the rate of change (first derivative)
-    reference_data = reference_data.dropna()
-    current_data = current_data.dropna()
-    reference_rate_of_change = np.diff(reference_data)
-    current_rate_of_change = np.diff(current_data)
-        
-    mean_ref = np.mean(reference_rate_of_change)
-    mean_curr = np.mean(current_rate_of_change)
-    # Compute the mean absolute difference in second derivatives between reference and current data
-    change_in_roc = np.abs(mean_curr - mean_ref)
-    chnage_in_roc_percentage = np.divide(change_in_roc,mean_ref)*100
-    
-    # If the change in rate of change is greater than the threshold, we detect drift
-    return chnage_in_roc_percentage, chnage_in_roc_percentage > threshold
+    try:
+        # Calculate the rate of change (first derivative)
+        reference_data = reference_data.dropna()
+        current_data = current_data.dropna()
+        reference_rate_of_change = np.diff(reference_data)
+        current_rate_of_change = np.diff(current_data)
+            
+        mean_ref = np.mean(reference_rate_of_change)
+        mean_curr = np.mean(current_rate_of_change)
+        # Compute the mean absolute difference in second derivatives between reference and current data
+
+        change_in_roc = np.abs(mean_curr - mean_ref)
+        chnage_in_roc_percentage = np.divide(change_in_roc,mean_ref)*100
+
+        # If the change in rate of change is greater than the threshold, we detect drift
+        return chnage_in_roc_percentage, chnage_in_roc_percentage > threshold
+    except Exception as e:
+        print(f"Error in change_in_rate_of_change_from_ref: {e}")
+        return 0, True
 
 # Create the StatTest object
 roc_stat_test = StatTest(
     name="change_in_rate_of_change",
-    display_name="Change in Rate of Change in Percentage",
+    display_name="Change in Rate of Change (Percentage)",
     allowed_feature_types=[ColumnType.Numerical],
     default_threshold=20
 )

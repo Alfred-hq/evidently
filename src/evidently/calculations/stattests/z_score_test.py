@@ -25,18 +25,23 @@ def _value_within_ref_z_score(
         pvalue: the proportion of current data within the reference Z-score range
         test_result: whether the drift is detected based on the threshold
     """
-    # Calculate mean and standard deviation of the reference data
-    ref_mean = reference_data.mean()
-    ref_std = reference_data.std()
+    try:
+        # Calculate mean and standard deviation of the reference data
+        ref_mean = reference_data.mean()
+        ref_std = reference_data.std()
 
-    # Calculate Z-scores for current data
-    z_scores_current = (current_data - ref_mean).divide(ref_std)
+        # Calculate Z-scores for current data
+        z_scores_current = (current_data - ref_mean).divide(ref_std)
 
-    # Calculate the proportion of current data values within the Z-score limit
-    proportion_within_z_score = np.mean(np.abs(z_scores_current) <= z_score_limit)
+        # Calculate the proportion of current data values within the Z-score limit
+        proportion_within_z_score = np.mean(np.abs(z_scores_current) <= z_score_limit)
+        
+        # If the proportion is below the threshold, drift is detected
+        return proportion_within_z_score*100, proportion_within_z_score*100 < threshold
     
-    # If the proportion is below the threshold, drift is detected
-    return proportion_within_z_score*100, proportion_within_z_score*100 < threshold
+    except Exception as e:
+        print(f"Error calculating value within reference Z-score: {e}")
+        return 0, True
 
 # Create the StatTest object for the value within reference Z-score test
 value_within_z_score_stat_test = StatTest(
